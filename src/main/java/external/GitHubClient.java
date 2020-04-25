@@ -16,7 +16,9 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GitHubClient {
 
@@ -100,14 +102,34 @@ public class GitHubClient {
 
     private List<Item> getItemList(JSONArray array) {
         List<Item> itemList = new ArrayList<>();
+        List<String> descriptionList = new ArrayList<>();
+
+        for (int i = 0; i < array.length(); i++) {
+            // We need to extract keywords from description since GitHub API
+            // doesn't return keywords.
+            String description = getStringFieldOrEmpty(array.getJSONObject(i), "description");
+            if (description.equals("") || description.equals("\n")) {
+                descriptionList.add(getStringFieldOrEmpty(array.getJSONObject(i), "title"));
+            } else {
+                descriptionList.add(description);
+            }
+        }
+
+        // We need to get keywords from multiple text in one request since
+        // MonkeyLearnAPI has limitations on request per minute.
+        List<List<String>> keywords = MonkeyLearnClient
+                .extractKeywords(descriptionList.toArray(new String[descriptionList.size()]));
         for (int i = 0; i < array.length(); ++i) {
             JSONObject object = array.getJSONObject(i);
+            Set<String> keyword = new HashSet<>(keywords.get(i));
+            keyword.remove("li");
 
             Item item = new Item.ItemBuilder().setItemId(getStringFieldOrEmpty(object, "id"))
                     .setName(getStringFieldOrEmpty(object, "title"))
                     .setAddress(getStringFieldOrEmpty(object, "location"))
                     .setUrl(getStringFieldOrEmpty(object, "url"))
                     .setImageUrl(getStringFieldOrEmpty(object, "company_logo"))
+                    .setKeywords(keyword)
                     .build();
 
             itemList.add(item);
