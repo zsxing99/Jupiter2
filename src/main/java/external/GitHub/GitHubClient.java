@@ -1,6 +1,7 @@
-package external;
+package external.GitHub;
 
 import entity.Item;
+import external.MonkeyLearnClient;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -22,53 +23,8 @@ import java.util.Set;
 
 public class GitHubClient {
 
-    private static final String URL_TEMPLATE_GEO = "https://jobs.github.com/" +
-            "positions.json?description=%s&lat=%s&long=%s&full_time=%s";
-    private static final String URL_TEMPLATE_LOC = "https://jobs.github.com/" +
-            "positions.json?description=%s&location=%s&full_time=%s";
-    private static final String DEFAULT_DESCRIPTION = "developer";
-    private static final String DEFAULT_TYPE = "true";
-
-    public List<Item> searchGeo(double lat, double lon, String keyword, String isFullTime) {
-        if (keyword == null) {
-            keyword = DEFAULT_DESCRIPTION;
-        }
-        if (isFullTime == null) {
-            isFullTime = DEFAULT_TYPE;
-        }
-        try {
-            keyword = URLEncoder.encode(keyword, "UTF-8");
-            isFullTime = URLEncoder.encode(isFullTime, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        String url = String.format(URL_TEMPLATE_GEO, keyword, lat, lon, isFullTime);
-
-        return searchUrl(url);
-    }
-
-    public List<Item> searchLocation(String location, String keyword, String isFullTime) {
-        if (keyword == null) {
-            keyword = DEFAULT_DESCRIPTION;
-        }
-        if (isFullTime == null) {
-            isFullTime = DEFAULT_TYPE;
-        }
-        try {
-            keyword = URLEncoder.encode(keyword, "UTF-8");
-            isFullTime = URLEncoder.encode(isFullTime, "UTF-8");
-            location = URLEncoder.encode(location, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        String url = String.format(URL_TEMPLATE_LOC, keyword, location, isFullTime);
-
-        return searchUrl(url);
-    }
-
-    private List<Item> searchUrl(String url) {
+    public List<Item> search(SearchQuery query) {
+        String url = query.toUrl();
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
         try {
