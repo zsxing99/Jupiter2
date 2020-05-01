@@ -50,7 +50,6 @@ public class Login extends HttpServlet {
                 obj.put("status", "OK").put("user_id", userId).put("name", connection.getFullname(userId));
             } else {
                 obj.put("status", "User Doesn't Exist");
-                response.setStatus(401);
             }
             RpcHelper.writeJsonObject(response, obj);
 
