@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Recommendation {
 
-    public List<Item> recommendItems(String userId, String lat, String lon) {
+    public List<Item> recommendItems(String userId, SearchQuery query) {
         List<Item> items = new ArrayList<>();
         DBConnection connection = DBConnectionFactory.getConnection();
         Set<Item> favoriteItems = connection.getFavoriteItems(userId);
@@ -37,13 +37,7 @@ public class Recommendation {
         GitHubClient client = new GitHubClient();
 
         for (Map.Entry<String, Integer> keyword : topKeywords) {
-            SearchQuery query = new SearchQuery();
-            query.addParam(new SearchQuery.SearchQueryParam(
-                    "keyword", keyword.getKey()
-            ));
-            query.addParam(new SearchQuery.SearchQueryParam("lat", lat));
-            query.addParam(new SearchQuery.SearchQueryParam("long", lon));
-
+            query.addParam(new SearchQuery.SearchQueryParam("description", keyword.getKey()));
             List<Item> result = client.search(query);
 
             for (Item item : result) {

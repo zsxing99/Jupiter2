@@ -40,13 +40,17 @@ public class SearchQuery {
             return value;
         }
 
+        /**
+         * two params are said to be equal if they have the same param name
+         * @param o
+         * @return
+         */
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             SearchQueryParam that = (SearchQueryParam) o;
-            return param.equals(that.param) &&
-                    value.equals(that.value);
+            return param.equals(that.param);
         }
 
         @Override
@@ -55,17 +59,22 @@ public class SearchQuery {
         }
     }
 
-    public boolean addParam(SearchQueryParam param) {
+    /**
+     * add param to the params list, override existing param if duplicate
+     * @param param
+     */
+    public void addParam(SearchQueryParam param) {
         if (param.getValue() == null || param.getParam() == null) {
-            return false;
+            return;
         }
         try {
             param.setValue(URLEncoder.encode(param.getValue(), "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            return false;
+            return;
         }
-        return params.add(param);
+        params.remove(param);
+        params.add(param);
     }
 
     public String toUrl() {
@@ -75,7 +84,6 @@ public class SearchQuery {
             builder.append("&");
         }
         builder.deleteCharAt(builder.length() - 1);
-        System.out.println(builder);
         return builder.toString();
     }
 }

@@ -1,6 +1,7 @@
 package rpc;
 
 import entity.Item;
+import external.github.SearchQuery;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import recommendation.Recommendation;
@@ -26,13 +27,14 @@ public class RecommendItem extends HttpServlet {
             response.setStatus(403);
             return;
         }
+
+        SearchQuery query = new SearchQuery();
         String userId = session.getAttribute("user_id").toString();
-        String lat = request.getParameter("lat");
-        String lon = request.getParameter("lon");
+        query.addParam(new SearchQuery.SearchQueryParam("lat", request.getParameter("lat")));
+        query.addParam(new SearchQuery.SearchQueryParam("long", request.getParameter("lon")));
 
         Recommendation recommendation = new Recommendation();
-        System.out.println(lat);
-        List<Item> items = recommendation.recommendItems(userId, lat, lon);
+        List<Item> items = recommendation.recommendItems(userId, query);
         JSONArray array = new JSONArray();
         for (Item item : items) {
             array.put(item.toJSONObject());
