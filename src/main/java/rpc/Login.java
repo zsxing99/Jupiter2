@@ -47,7 +47,9 @@ public class Login extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user_id", userId);
                 session.setMaxInactiveInterval(600);
-                obj.put("status", "OK").put("user_id", userId).put("name", connection.getFullname(userId));
+                obj.put("status", "OK").put("user_id", userId)
+                        .put("name", connection.getFullname(userId))
+                        .put("currentAuthority", "user");
             } else {
                 obj.put("status", "User Doesn't Exist");
             }

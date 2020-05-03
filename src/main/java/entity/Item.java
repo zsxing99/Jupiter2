@@ -3,6 +3,7 @@ package entity;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class Item {
@@ -57,6 +58,19 @@ public class Item {
 
     public String getUrl() {
         return url;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return itemId.equals(item.itemId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(itemId);
     }
 
     public static class ItemBuilder {

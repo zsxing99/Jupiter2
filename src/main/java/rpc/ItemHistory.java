@@ -60,6 +60,7 @@ public class ItemHistory extends HttpServlet {
             JSONArray array = input.getJSONArray("favorite");
             List<String> itemIds = new ArrayList<>();
             for(int i = 0; i < array.length(); ++i) {
+                System.out.println(array.getString(i));
                 itemIds.add(array.getString(i));
             }
             connection.setFavoriteItems(userId, itemIds);

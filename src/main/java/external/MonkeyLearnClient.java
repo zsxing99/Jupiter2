@@ -14,7 +14,7 @@ import com.monkeylearn.MonkeyLearnResponse;
 
 public class MonkeyLearnClient {
 
-    private static final String API_KEY = "732afb0f47779607187ff8911413e4ca0ed248c7";
+    private static final String API_KEY = "b60cc5751bd55aa229ae7d04c66fd57950de8462";
 
     public static void main(String[] args) {
 
@@ -58,12 +58,15 @@ public class MonkeyLearnClient {
     private static List<List<String>> getKeywords(JSONArray mlResultArray) {
         List<List<String>> topKeywords = new ArrayList<>();
 
-        for (int i = 0; i < mlResultArray.size(); i++) {
+        for (Object value : mlResultArray) {
             List<String> keywords = new ArrayList<>();
-            JSONArray keywordsArray = (JSONArray) mlResultArray.get(i);
-            for (int j = 0; j < keywordsArray.size(); j++) {
-                JSONObject keywordObject = (JSONObject) keywordsArray.get(j);
+            JSONArray keywordsArray = (JSONArray) value;
+            for (Object o : keywordsArray) {
+                JSONObject keywordObject = (JSONObject) o;
                 String keyword = (String) keywordObject.get("keyword");
+                if (keyword.matches("(.*)</li")) {
+                    keyword = keyword.substring(0, keyword.length() - 4);
+                }
                 keywords.add(keyword);
             }
             topKeywords.add(keywords);

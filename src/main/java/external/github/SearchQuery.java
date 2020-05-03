@@ -1,5 +1,7 @@
-package external.GitHub;
+package external.github;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -18,6 +20,11 @@ public class SearchQuery {
 
     public static class SearchQueryParam {
         private String param;
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
         private String value;
 
         public SearchQueryParam(String param, String value) {
@@ -52,6 +59,12 @@ public class SearchQuery {
         if (param.getValue() == null || param.getParam() == null) {
             return false;
         }
+        try {
+            param.setValue(URLEncoder.encode(param.getValue(), "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return false;
+        }
         return params.add(param);
     }
 
@@ -62,6 +75,7 @@ public class SearchQuery {
             builder.append("&");
         }
         builder.deleteCharAt(builder.length() - 1);
+        System.out.println(builder);
         return builder.toString();
     }
 }

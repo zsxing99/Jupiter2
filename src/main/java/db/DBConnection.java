@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import entity.Item;
-import external.GitHub.SearchQuery;
+import external.github.SearchQuery;
 
 public abstract class DBConnection {
     /**

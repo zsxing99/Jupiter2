@@ -3,8 +3,7 @@ package rpc;
 import db.DBConnection;
 import db.DBConnectionFactory;
 import entity.Item;
-import external.GitHub.GitHubClient;
-import external.GitHub.SearchQuery;
+import external.github.SearchQuery;
 import org.json.JSONArray;
 
 import javax.servlet.ServletException;

@@ -1,4 +1,4 @@
-package external.GitHub;
+package external.github;
 
 import entity.Item;
 import external.MonkeyLearnClient;
@@ -14,8 +14,6 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

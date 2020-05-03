@@ -5,12 +5,11 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.ne;
 
 import db.DBConnection;
 import entity.Item;
-import external.GitHub.GitHubClient;
-import external.GitHub.SearchQuery;
+import external.github.GitHubClient;
+import external.github.SearchQuery;
 import org.bson.Document;
 
 import java.util.HashSet;
@@ -41,7 +40,7 @@ public class MongoDBConnection extends DBConnection {
         if (db == null) {
             return;
         }
-        db.getCollection("user").updateOne(eq("user_id", userId),
+        db.getCollection("users").updateOne(eq("user_id", userId),
                 new Document("$push", new Document("favorite", new Document("$each", itemIds))));
     }
 
