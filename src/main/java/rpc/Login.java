@@ -25,7 +25,7 @@ public class Login extends HttpServlet {
                 obj.put("status", "OK").put("user_id", userId).put("name", connection.getFullname(userId));
             } else {
                 obj.put("status", "Invalid Session");
-                response.setStatus(403);
+                response.setStatus(401);
             }
             RpcHelper.writeJsonObject(response, obj);
         } catch (Exception e) {

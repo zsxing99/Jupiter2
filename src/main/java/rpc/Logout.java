@@ -1,5 +1,7 @@
 package rpc;
 
+import org.json.JSONObject;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,9 +18,14 @@ public class Logout extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
+        JSONObject obj = new JSONObject();
+        obj.put("currentAuthority", "guest");
         if (session != null) {
+            obj.put("status", "OK");
             session.invalidate();
+        } else {
+            obj.put("status", "Session doesn't Exist");
         }
-        response.sendRedirect("index.html");
+        RpcHelper.writeJsonObject(response, obj);
     }
 }
