@@ -27,11 +27,10 @@ public class Register extends HttpServlet {
             response.setContentType("application/json");
             if (connection.registerUser(userId, password, firstName, lastName)) {
                 object.put("status", "OK");
-                response.setStatus(HttpServletResponse.SC_OK);
             } else {
                 object.put("status", "User Already Exist");
-                response.setStatus(HttpServletResponse.SC_OK);
             }
+            response.setStatus(HttpServletResponse.SC_OK);
             RpcHelper.writeJsonObject(response, object);
         } catch (Exception e) {
             e.printStackTrace();

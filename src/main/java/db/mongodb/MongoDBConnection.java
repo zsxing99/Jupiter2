@@ -90,7 +90,9 @@ public class MongoDBConnection extends DBConnection {
                         .setImageUrl(doc.getString("image_url"))
                         .setUrl(doc.getString("url"))
                         .setItemId(doc.getString("item_id"))
-                        .setKeywords(getKeywords(itemId));
+                        .setKeywords(getKeywords(itemId))
+                        .setCompany(doc.getString("company"))
+                        .setCompanyUrl(doc.getString("company_url"));
 
                 favoriteItems.add(builder.build());
             }
@@ -137,7 +139,9 @@ public class MongoDBConnection extends DBConnection {
                     .append("name", item.getName())
                     .append("image_url", item.getImageUrl())
                     .append("url", item.getUrl())
-                    .append("keywords", item.getKeywords());
+                    .append("keywords", item.getKeywords())
+                    .append("company", item.getCompany())
+                    .append("company_url", item.getCompanyUrl());
 
             if (iterable.first() == null) {
                 db.getCollection("items").insertOne(document);

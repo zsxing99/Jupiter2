@@ -14,6 +14,9 @@ public class Item {
     private Set<String> keywords;
     private String imageUrl;
     private String url;
+    private String description;
+    private String company;
+    private String companyUrl;
 
     private Item(ItemBuilder builder) {
         this.itemId = builder.itemId;
@@ -22,6 +25,9 @@ public class Item {
         this.imageUrl = builder.imageUrl;
         this.url = builder.url;
         this.keywords = builder.keywords;
+        this.description = builder.description;
+        this.companyUrl = builder.companyUrl;
+        this.company = builder.company;
     }
 
 
@@ -33,6 +39,8 @@ public class Item {
         object.put("keywords", new JSONArray(keywords));
         object.put("image_url", imageUrl);
         object.put("url", url);
+        object.put("company", company);
+        object.put("company_url", companyUrl);
         return object;
     }
 
@@ -73,6 +81,14 @@ public class Item {
         return Objects.hash(itemId);
     }
 
+    public String getCompany() {
+        return company;
+    }
+
+    public String getCompanyUrl() {
+        return companyUrl;
+    }
+
     public static class ItemBuilder {
         private String itemId;
         private String name;
@@ -80,6 +96,9 @@ public class Item {
         private String imageUrl;
         private String url;
         private Set<String> keywords;
+        private String description;
+        private String company;
+        private String companyUrl;
 
         public ItemBuilder setItemId(String itemId) {
             this.itemId = itemId;
@@ -113,6 +132,21 @@ public class Item {
 
         public Item build() {
             return new Item(this);
+        }
+
+        public ItemBuilder setDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public ItemBuilder setCompany(String company) {
+            this.company = company;
+            return this;
+        }
+
+        public ItemBuilder setCompanyUrl(String companyUrl) {
+            this.companyUrl = companyUrl;
+            return this;
         }
     }
 

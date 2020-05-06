@@ -28,8 +28,9 @@ public class Login extends HttpServlet {
                 response.setStatus(401);
             }
             RpcHelper.writeJsonObject(response, obj);
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             e.printStackTrace();
+            response.setStatus(401);
         } finally {
             connection.close();
         }

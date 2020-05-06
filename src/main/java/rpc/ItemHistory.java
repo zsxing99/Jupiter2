@@ -24,7 +24,7 @@ public class ItemHistory extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         if (session == null) {
-            response.setStatus(403);
+            response.setStatus(401);
             return;
         }
         String userId = session.getAttribute("user_id").toString();
@@ -35,7 +35,7 @@ public class ItemHistory extends HttpServlet {
             Set<Item> items = conn.getFavoriteItems(userId);
             for (Item item : items) {
                 JSONObject obj = item.toJSONObject();
-                obj.append("favorite", true);
+                obj.put("favorite", true);
                 array.put(obj);
             }
 
@@ -51,7 +51,7 @@ public class ItemHistory extends HttpServlet {
         DBConnection connection = DBConnectionFactory.getConnection();
         HttpSession session = request.getSession(false);
         if (session == null) {
-            response.setStatus(403);
+            response.setStatus(401);
             return;
         }
         try {
@@ -77,7 +77,7 @@ public class ItemHistory extends HttpServlet {
         DBConnection connection = DBConnectionFactory.getConnection();
         HttpSession session = request.getSession(false);
         if (session == null) {
-            response.setStatus(403);
+            response.setStatus(401);
             return;
         }
         try {

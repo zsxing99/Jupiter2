@@ -84,6 +84,9 @@ public class GitHubClient {
                     .setUrl(getStringFieldOrEmpty(object, "url"))
                     .setImageUrl(getStringFieldOrEmpty(object, "company_logo"))
                     .setKeywords(keyword)
+                    .setDescription(getStringFieldOrEmpty(object, "description"))
+                    .setCompany(getStringFieldOrEmpty(object, "company"))
+                    .setCompanyUrl(getStringFieldOrEmpty(object, "company_url"))
                     .build();
 
             itemList.add(item);
