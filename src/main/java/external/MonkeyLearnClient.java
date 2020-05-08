@@ -1,7 +1,6 @@
 package external;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -14,7 +13,7 @@ import com.monkeylearn.MonkeyLearnResponse;
 
 public class MonkeyLearnClient {
 
-    private static final String API_KEY = "b60cc5751bd55aa229ae7d04c66fd57950de8462";
+    private static final String API_KEY = "e6ad8c328c0cd50ffa10f8d1c7ca6226c8c1ada6";
 
     public static void main(String[] args) {
 
