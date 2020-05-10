@@ -10,6 +10,30 @@ Github jobs API to make a job recommendation.
 The project is deployment on AWS. Click this [link](http://54.193.31.55/Jupiter2/) to
 access the demo.
 
+### Project Demo
+
+#### Desktop
+
+![Login](./demo/screenshots/desktop/Annotation%202020-05-09%20181058.png)
+
+![Register](./demo/screenshots/desktop/Annotation%202020-05-09%20181059.png)
+
+![Welcome](./demo/screenshots/desktop/Annotation%202020-05-09%20181060.png)
+
+![Search](./demo/screenshots/desktop/Annotation%202020-05-09%20181061.png)
+
+![Favorite](./demo/screenshots/desktop/Annotation%202020-05-09%20181062.png)
+
+![Recommend](./demo/screenshots/desktop/Annotation%202020-05-09%20181063.png)
+
+#### Phone
+
+![Login](./demo/screenshots/phone/Annotation%202020-05-09%20181064.png)
+
+![Register](./demo/screenshots/phone/Annotation%202020-05-09%20181065.png)
+
+![Favorite](./demo/screenshots/phone/Annotation%202020-05-09%20181067.png)
+
 ### Project Structure
 It is a full stack project covering front-end/backend/database
 
