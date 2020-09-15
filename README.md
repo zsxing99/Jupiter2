@@ -8,7 +8,7 @@ Github jobs API to make a job recommendation.
 ### Cloud Deployment
 
 The project is deployment on AWS. Click this [link](http://54.193.31.55/Jupiter2/) to
-access the demo.
+access the demo. Server is under maintainence.
 
 ### Project Demo
 
